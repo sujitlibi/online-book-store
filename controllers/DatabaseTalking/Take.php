@@ -1,7 +1,5 @@
 <?php
-/**
- * this class is  coded  by Ahmed  Embaby in  24  SEP  2019
- */
+
 spl_autoload_register(function ($class){
     $arr=[__DIR__.'/../../models/goods',
         __DIR__.'/../../models/orders',
@@ -167,7 +165,7 @@ class Take extends Talking
     public function takeBook(Book $book):bool {
         try{
             $this->stat=$this->conn->prepare("
-            insert into book(book_id, title, author_id, publisher_id, genre_id, ISBN, sell_price, buy_price, image, description, quantity, actual_quantity) 
+            insert into book(book_id, title, author_id, publisher_id, genre_id, ISBN, sell_price, buy_price, image, description, quantity, actual_quantity)
             values (?,?,?,?,?,?,?,?,?,?,?,?);");
             $this->stat->bindValue(1,$book->getId(),PDO::PARAM_INT);
             $this->stat->bindValue(2,$book->getName());
@@ -206,7 +204,7 @@ class Take extends Talking
             $this->deleteImage(__DIR__.'/../../images/'.$row['image']);
             $this->stat=$this->conn->prepare("
             UPDATE book SET author_id=?,publisher_id=?,buy_price=?,sell_price=?,quantity=?,
-            actual_quantity=?,image=? WHERE book_id=?;  
+            actual_quantity=?,image=? WHERE book_id=?;
             ");
             $this->stat->bindValue(1,$book->getAuthor()->getId(),PDO::PARAM_INT);
             $this->stat->bindValue(2,$book->getPublisher()->getId(),PDO::PARAM_INT);
